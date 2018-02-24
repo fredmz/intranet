@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <title>Gestión de Usuarios</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="col-9">
+            <h1><i class="fa fa-user"></i> Gestión de usuarios</h1>
+        </div>
+        <div class="col-3 text-right">
+            <button id="usuario-exportar" class="btn btn-success" onclick="Usuario.expotar()"><i class="fa fa-file-excel-o"></i> Exportar</button>
+            <button id="nuevo-usuario" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo</button>
+        </div>
+    </div>
+    <form id="form-filtro-usuario" class="filtros">
+        <div class="form-row">
+            <div class="form-group col-12 col-sm-3">
+                <input type="text" placeholder="Referencia" name="referencia" class="form-control mr-2" th:value="${filtro.referencia}" autofocus>
+            </div>
+            <div class="form-group col-12 col-sm-5">
+                <span class="mr-1">Roles</span>
+                <select name="roles" multiple="multiple" class="multiselect">
+                    <option th:each="rol : ${roles}" th:value="${rol.nombre}" th:text="${rol.nombre}" th:selected="${filtro.roles.contains(rol.nombre)}"></option>
+                </select>
+            </div>
+            <div class="form-group col-12 col-sm-4 text-right">
+                <button class="btn btn-success mr-1"><i class="fa fa-filter"></i> Filtrar</button>
+                <span class="btn btn-warning" onclick="limpiarFiltro()"><i class="fa fa-refresh"></i> Limpiar</span>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-list" id="tabla-usuarios">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Habilitado</th>
+                <th>Rol</th>
+                <th>Acción</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="usuario : ${lista}">
+                <td th:text="${usuario.login}"></td>
+                <td th:text="${usuario.correo}"></td>
+                <td th:text="${usuario.habilitado}"></td>
+                <td th:text="${usuario.rolNombre}"></td>
+                <td class="text-right">
+                    <div class="btn-group" role="group">
+                        <button th:onclick="'editarUsuario(\'' + ${usuario.login} + '\')'" class="btn btn-primary btn-sm btn-usuario-editar" data-toggle="tooltip" data-placement="top" title="Editar usuario"><i class="fa fa-edit"></i></button>
+                        <button th:onclick="'eliminarUsuario(\'' + ${usuario.login} + '\')'" class="btn btn-danger btn-sm btn-usuario-eliminar" data-toggle="tooltip" data-placement="top" title="Eliminar usuario"><i class="fa fa-remove"></i></button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    <div th:replace="fragments/pagination :: pagination"></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</th:block>
+<th:block layout:fragment="script">
+    <script>
+        function eliminarUsuario(login) {
+            Usuario.eliminar(login, function () {
+                reloadAfterPost();
+            });
+        }
+
+        function editarUsuario(login) {
+            Usuario.loadEditForm(function() {
+                reloadAfterPost();
+            }, login);
+        }
+        $(function() {
+            $('#nuevo-usuario').click(function() {
+                Usuario.loadCreateForm(function(){
+                    reloadAfterPost();
+                });
+            });
+        });
+    </script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <p>Seleccione los permisos que se aplicarán al usuario</p>
+    <p th:if="${esAdmin}" class="text-success">
+        ROLE_ADMIN tiene acceso a todos los enlaces y modulos del sistema
+    </p>
+    <div class="form-group row">
+        <label class="col-2">Módulo</label>
+        <div class="col-10">
+            <select class="form-control" id="permiso-modulo">
+                <option value="">--Seleccione--</option>
+                <option th:each="modulo : ${modulos}" class="modulo" th:value="${modulo.id}"
+                        th:text="${modulo.nombre}"></option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <div class="table-responsive">
+            <table class="table table-bordered w-100" id="permisos-submodulos">
+                <thead>
+                    <tr>
+                        <th>Sub módulo</th>
+                        <th>Enlace</th>
+                        <th>Acceso</th>
+                        <th>Enlaces</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        $(function() {
+            $('#permiso-modulo').change(function () {
+                document.querySelector('#permisos-submodulos tbody').innerHTML = '';
+                var moduloId = $(this).val();
+                var rol = '[[${rol}]]';
+                if (moduloId != '') {
+                    Submodulo.renderSubmodulosParaPermisos(moduloId, rol);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

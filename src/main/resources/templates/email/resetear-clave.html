@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resetear clave</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body style="font-family: Verdana; text-align: justify;">
+<div style="max-width: 600px; margin: 10px auto; padding: 1rem;">
+    <img th:src="${baseUrl}+'/img/logo.png'" th:alt="${appName}">
+    <h1 style="color: #d73213;">Resetear clave</h1>
+    <p>
+        Hola, haz recibido este correo debido a que olvidaste tu clave y deseas crear una nueva.
+    </p>
+    <p>
+        Para resetear tu clave, por favor haz clic en el siguiente enlace:
+    </p>
+    <p style="text-align: center;">
+        <a style="color: #2196f3;" th:href="${baseUrl}+'/resetear-clave?resetKey='+${usuario.resetKey}"
+           th:text="${baseUrl}+'/resetear-clave?resetKey='+${usuario.resetKey}">Resetear clave</a>
+    </p>
+    <p style="color: #fd4000; font-style: italic;">
+        Ten en cuenta que sólo podrás usar este enlace dentro de la próxima media hora, pasado este tiempo el enlace quedará sin efecto, por lo que tendrás que solicitar un nuevo reseteo de clave.
+    </p>
+    <p>
+        <span>Saludos,</span>
+    </p>
+    <p>
+        Equipo de <span th:text="${appName}"></span>
+    </p>
+</div>
+</body>
+</html>

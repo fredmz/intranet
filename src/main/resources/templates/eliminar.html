@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form name="eliminar-entidad">
+    <input type="hidden" th:value="${_csrf.token}" th:name="${_csrf.parameterName}"/>
+    <div class="alert alert-warning" role="alert">
+        <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i> Tenga en cuenta que la eliminación de datos no es un proceso reversible.
+    </div>
+    <div class="form-group text-right">
+        <button type="reset" class="btn btn-danger">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Eliminar</button>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/vendors/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/vendors/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .error-sistema{
+            margin-top: 50px;}
+        .h1-error {
+            font-size: 5rem;
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+<div class="container">
+    <div class="error-sistema text-center">
+        <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|" class="text-danger h1-error">404</h1>
+        <h1 class="text-danger"><i class="fa fa-exclamation-triangle"></i> Ooops, Hubo un error en la página</h1>
+        <br>
+        <p>
+            <span class="text-danger">Nombre del error: </span><span th:text="${error}"></span>&nbsp;(<span th:text="${error}"></span>)
+        </p>
+        <p>
+            <span class="text-danger">Motivo: </span> <span th:utext="${errorMessage}">Error java.lang.NullPointerException</span>
+        </p>
+        <p>
+            <span class="text-danger">Mensaje:</span> <span th:text="${message}"></span>
+        </p>
+        <a href="/menu" th:href="@{/menu}">Regresar al menu</a>
+    </div>
+</div>
+</body>
+</html>
