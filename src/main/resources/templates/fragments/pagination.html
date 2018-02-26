@@ -4,7 +4,7 @@
 </head>
 <body>
 <div th:fragment="pagination">
-    <div th:if="${lista.totalPages != 1}">
+    <div th:if="${lista.totalPages > 1}">
         <ul class="pagination pagination-load justify-content-end">
             <li class="page-item" th:classappend="${lista.number == 0} ? disabled">
                 <a class="page-link pagination-link" data-page="1">&laquo;</a>

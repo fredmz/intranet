@@ -13,7 +13,7 @@ class Enlace(
         @Column(length = 150)
         var nombre: String = "",
         @Column(length = 45, nullable = false)
-        var submoduloId: String,
+        var submoduloId: String = "",
         @Column(length = 250, nullable = false)
         var descripcion: String = "",
         @Column(length = 10, nullable = false)

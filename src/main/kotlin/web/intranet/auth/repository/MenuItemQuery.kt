@@ -15,7 +15,7 @@ class MenuItemQuery(
 
     protected fun query(rol: String): String {
         var whereRol = ""
-        if (rol == "ROLE_ADMIN") {
+        if (rol != "ROLE_ADMIN") {
             whereRol = """
                 JOIN auth_permiso aper ON asmo.id = aper.submodulo_id
                 WHERE aper.rol_nombre = '${rol}'
