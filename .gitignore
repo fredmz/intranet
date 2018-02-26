@@ -24,4 +24,4 @@ nbdist/
 .nb-gradle/
 
 ### properties from the project, there is a copy with real values named applicacion.properties_ ###
-src/main/resources/applicacion.properties
+src/main/resources/application.properties
