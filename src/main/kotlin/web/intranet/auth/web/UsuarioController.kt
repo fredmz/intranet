@@ -47,10 +47,7 @@ class UsuarioController(
     fun listar(usuarioFilter: UsuarioFilter, pageable: Pageable): ResponseEntity<List<Usuario>> {
         log.info("UsuarioResource listar: " + usuarioFilter)
         var page = usuarioService.findAll(usuarioFilter, pageable)
-        return ResponseEntity(
-                page.content,
-                PaginationUtils().generatePaginationHttpHeaders(page, "/innerApi/auth/usuarios"),
-                HttpStatus.OK
+        return ResponseEntity.ok().body(page.content);
         )
     }
 
